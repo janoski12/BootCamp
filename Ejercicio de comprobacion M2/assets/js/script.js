@@ -1,4 +1,15 @@
 $(document).ready(function() {
+    // Cambiar contenido del hero section
+    $('#change-content').click(function() {
+        $('#hero-title').text('Disponibilidad Inmediata');
+        $('#hero-description').text('Correo de Contacto: alejandroacunab.12@gmail.com');
+    });
+
+    // Actualizar contenido de la sección "Sobre mí"
+    $('#update-about').click(function() {
+        $('#about-description').text('También poseo amplio conocimiento en lenguajes PHP, Java, C# y Python');
+    });
+
     // Validación del formulario de contacto
     $('#contactForm').on('submit', function(event) {
         event.preventDefault();
