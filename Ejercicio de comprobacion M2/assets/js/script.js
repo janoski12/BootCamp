@@ -1,13 +1,32 @@
 $(document).ready(function() {
     // Cambiar contenido del hero section
+    var originalHeroTitle = $('#hero-title').text();
+    var originalHeroDescription = $('#hero-description').text();
+    var originalAboutDescription = $('#about-description').text();
+
+    var isHeroContentChanged = false;
+    var isAboutContentChanged = false;
+    
+    
     $('#change-content').click(function() {
-        $('#hero-title').text('Disponibilidad Inmediata');
-        $('#hero-description').text('Correo de Contacto: alejandroacunab.12@gmail.com');
+        if (isHeroContentChanged){
+            $('#hero-title').text(originalHeroTitle);
+            $('#hero-description').text(originalHeroDescription);
+        } else{
+            $('#hero-title').text('Disponibilidad Inmediata');
+            $('#hero-description').text('Correo de Contacto: alejandroacunab.12@gmail.com');
+        }
+        isHeroContentChanged = !isHeroContentChanged;
     });
 
     // Actualizar contenido de la sección "Sobre mí"
     $('#update-about').click(function() {
-        $('#about-description').text('También poseo amplio conocimiento en lenguajes PHP, Java, C# y Python');
+        if(isAboutContentChanged){
+            $('#about-description').text(originalAboutDescription);
+        } else {
+            $('#about-description').text('También poseo amplio conocimiento en lenguajes PHP, Java, C# y Python');
+        }
+        isAboutContentChanged = !isAboutContentChanged;
     });
 
     // Validación del formulario de contacto
