@@ -1,21 +1,54 @@
 body {
     font-family: Arial, sans-serif;
+    background-color: #F8F9FA;
+    color: #343A40;
+}
+
+.navbar {
+    background-color: #343A40;
+}
+
+.navbar-brand, .nav-link {
+    color: #FFFFFF !important;
 }
 
 .hero-section {
-    background: #333;
-    color: #fff;
-    padding: 100px 0;
+    background: #007BFF;
+    color: #FFFFFF;
+    padding: 60px 0;
 }
 
-.about-section, .projects-section, .contact-section {
-    padding: 50px 0;
+.about-section {
+    background-color: #FFFFFF;
+    color: #343A40;
+    padding: 60px 0;
 }
+
+.projects-section {
+    background-color: #F8F9FA;
+    padding: 60px 0;
+}
+
+.contact-section {
+    background-color: #FFFFFF;
+    padding: 60px 0;
+}
+
 
 .footer {
-    background: #333;
-    color: #fff;
+    background-color: #343A40;
+    color: #FFFFFF;
     padding: 20px 0;
+}
+
+.btn-primary {
+    background-color: #28A745;
+    border: none;
+}
+
+.btn-secondary {
+    background-color: #28A745;
+    border: none;
 }
 
 /* Responsive Styles */
