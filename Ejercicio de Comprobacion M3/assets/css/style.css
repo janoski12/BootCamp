@@ -1,0 +1,52 @@
+body {
+    background: url('background.jpg') no-repeat center center fixed;
+    background-size: cover;
+    color: white;
+}
+
+.navbar {
+    margin-bottom: 20px;
+}
+
+#conversation-list .list-group-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+#conversation-list .list-group-item.unread .sender-name {
+    font-weight: bold;
+}
+
+.card {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.card-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+}
+
+#chat-window {
+    height: 400px;
+    overflow-y: auto;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.card-footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.input-group .form-control {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+.input-group .form-control::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.input-group .btn {
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
