@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Chat de Soporte</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -28,23 +31,45 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Noticias</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Calendario</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Perfil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Organigrama</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Chat de soporte</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container-fluid mt-3">
-        <div class="row">
+    <div class="container-fluid mt-3 full-height">
+        <div class="d-lg-none">
+            <button class="btn btn-primary w-100 mb-2" type="button" data-bs-toggle="collapse" data-bs-target="#conversation-list" aria-expanded="false" aria-controls="conversation-list">
+                Conversaciones
+            </button>
+        </div>
+        
+        <div class="row full-height">
             <!-- Lista de conversaciones -->
-             <div class="col-lg-3 d-none d-lg-block">
-                <div class="list-group" id="conversation-list">
+            <div class="collapse d-lg-block col-lg-3 bg-light p-0 border-end" id="conversation-list">
+                <div class="p-3 border-bottom">
+                    <input type="text" class="form-control" id="search-conversations" placeholder="Buscar conversaciones...">
+                </div>
+                <div class="list-group full-height" >
                     <!-- Conversaciones -->
-                    <a href="#" class="list-group-item list-group-item-action">
+                    <a href="#" class="list-group-item list-group-item-action unread">
                         <div class="d-flex w-100 align-items-center">
-                            <img src="assets/img/user_icon.png" alt="Perfil de Juan" class="rounded-circle me-3" width="50" height="50">
+                            <img src="assets/img/user_icon.png" alt="Perfil de Juan" class="rounded-circle me-3"
+                                width="50" height="50">
                             <div class="w-100">
                                 <div class="d-flex justify-content-between">
-                                    <h5 class="mb-1">Juan Perez</h5>
+                                    <h5 class="mb-1 conversation-name">Juan Perez</h5>
                                     <small class="text-muted">10:30 AM</small>
                                 </div>
                                 <p class="mb-1">Hola, ¿cómo estás?</p>
@@ -53,7 +78,8 @@
                     </a>
                     <a href="#" class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 align-items-center">
-                            <img src="assets/img/user_icon.png" alt="Perfil de Juan" class="rounded-circle me-3" width="50" height="50">
+                            <img src="assets/img/user_icon.png" alt="Perfil de Juan" class="rounded-circle me-3"
+                                width="50" height="50">
                             <div class="w-100">
                                 <div class="d-flex justify-content-between">
                                     <h5 class="mb-1">Alejandro Bonilla</h5>
@@ -63,12 +89,13 @@
                             </div>
                         </div>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action">
+                    <a href="#" class="list-group-item list-group-item-action unread">
                         <div class="d-flex w-100 align-items-center">
-                            <img src="assets/img/user_icon.png" alt="Perfil de Juan" class="rounded-circle me-3" width="50" height="50">
+                            <img src="assets/img/user_icon.png" alt="Perfil de Juan" class="rounded-circle me-3"
+                                width="50" height="50">
                             <div class="w-100">
                                 <div class="d-flex justify-content-between">
-                                    <h5 class="mb-1">Juan Perez</h5>
+                                    <h5 class="mb-1 conversation-name">Juan Perez</h5>
                                     <small class="text-muted">Ayer</small>
                                 </div>
                                 <p class="mb-1">Gracias por tu ayuda</p>
@@ -77,7 +104,8 @@
                     </a>
                     <a href="#" class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 align-items-center">
-                            <img src="assets/img/user_icon.png" alt="Perfil de Juan" class="rounded-circle me-3" width="50" height="50">
+                            <img src="assets/img/user_icon.png" alt="Perfil de Juan" class="rounded-circle me-3"
+                                width="50" height="50">
                             <div class="w-100">
                                 <div class="d-flex justify-content-between">
                                     <h5 class="mb-1">Juan Perez</h5>
@@ -87,12 +115,13 @@
                             </div>
                         </div>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action">
+                    <a href="#" class="list-group-item list-group-item-action unread">
                         <div class="d-flex w-100 align-items-center">
-                            <img src="assets/img/user_icon.png" alt="Perfil de Juan" class="rounded-circle me-3" width="50" height="50">
+                            <img src="assets/img/user_icon.png" alt="Perfil de Juan" class="rounded-circle me-3"
+                                width="50" height="50">
                             <div class="w-100">
                                 <div class="d-flex justify-content-between">
-                                    <h5 class="mb-1">Juan Perez</h5>
+                                    <h5 class="mb-1 conversation-name">Juan Perez</h5>
                                     <small class="text-muted">18:30 PM</small>
                                 </div>
                                 <p class="mb-1">Hola, ¿cómo estás?</p>
@@ -101,7 +130,8 @@
                     </a>
                     <a href="#" class="list-group-item list-group-item-action">
                         <div class="d-flex w-100 align-items-center">
-                            <img src="assets/img/user_icon.png" alt="Perfil de Juan" class="rounded-circle me-3" width="50" height="50">
+                            <img src="assets/img/user_icon.png" alt="Perfil de Juan" class="rounded-circle me-3"
+                                width="50" height="50">
                             <div class="w-100">
                                 <div class="d-flex justify-content-between">
                                     <h5 class="mb-1">Juan Perez</h5>
@@ -111,12 +141,13 @@
                             </div>
                         </div>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action">
+                    <a href="#" class="list-group-item list-group-item-action unread">
                         <div class="d-flex w-100 align-items-center">
-                            <img src="assets/img/user_icon.png" alt="Perfil de Juan" class="rounded-circle me-3" width="50" height="50">
+                            <img src="assets/img/user_icon.png" alt="Perfil de Juan" class="rounded-circle me-3"
+                                width="50" height="50">
                             <div class="w-100">
                                 <div class="d-flex justify-content-between">
-                                    <h5 class="mb-1">Juan Perez</h5>
+                                    <h5 class="mb-1 conversation-name">Juan Perez</h5>
                                     <small class="text-muted">9:30 AM</small>
                                 </div>
                                 <p class="mb-1">Hola, ¿cómo estás?</p>
@@ -124,23 +155,45 @@
                         </div>
                     </a>
                 </div>
-             </div>
-             <div class="col-lg-9">
+            </div>
+            <div class="col-lg-9 chat-container">
                 <div class="card">
                     <div class="card-header d-flex align-item-center">
-                        <img src="assets/img/user_icon.png" alt="Perfil" class="rounded-circle" width="50" height="50">
+                        <img src="assets/img/user_icon.png" alt="Perfil" class="rounded-circle" width="50" height="50" style="background-color: white;">
                         <div class="ms-3">
                             <h5 class="card-title mb-0">Nombre del Usuario</h5>
                         </div>
                     </div>
-                    <div class="card-body" id="chat-window">
+                    <div class="card-body chat-content" id="chat-window">
                         <!-- Mensajes -->
+                        <div class="message sent">
+                            <div class="message-content">
+                                <p>¡Hola! Como estas?</p>
+                                <span class="message-info">
+                                    <span class="time">10:45</span>
+                                    <span class="status">
+                                        <img src="assets/img/sent-icon.png" alt="Enviado" class="icon">
+                                        <img src="assets/img/recived-icon.png" alt="Recibido" class="icon">
+                                        <img src="assets/img/read-icon.png" alt="Leído" class="icon">
+                                    </span>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="message received">
+                            <div class="message-content">
+                                <p>Hola, estoy bien y tu?</p>
+                                <span class="message-info">
+                                    <span class="time">10:45 AM</span>
+                                </span>
+                            </div>
+                        </div>
                     </div>
                     <div class="card-footer">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Escribe un mensaje....">
                             <button class="btn btn-primary" type="button">Enviar</button>
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
+                                data-bs-toggle="dropdown" aria-expanded="false">
                                 Adjuntar
                             </button>
                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -151,10 +204,12 @@
                         </div>
                     </div>
                 </div>
-             </div>
+            </div>
         </div>
     </div>
+    <script src="assets/js/script.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 </body>
+
 </html>
