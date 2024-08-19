@@ -1,18 +1,66 @@
 body {
-    background-color: #f8f9fa;
-    font-family: Arial, sans-serif;
+    background-color: #f8f2f5;
+    font-family: 'Helvetica Neue', sans-serif;
 }
 
 h1 {
     color: #343a40;
+    font-size: 2.5rem;
+    text-align: center;
 }
 
 .list-group-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 10px;
+    background-color: #fff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3 ease;
 }
 
-button {
-    margin-left: 10px;
+.list-group-item:hover {
+    transform: scale(1.02);
+}
+
+#carrito .list-group-item {
+    animation: fadeIn 0.5s;
+}
+
+.list-group-item button {
+    background-color: #007bff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+    transition: background-color 0.3 ease;
+}
+
+.list-group-item button:hover {
+    background-color: #0056b3;
+}
+
+#finalizar-compra {
+    background-color: #28a745;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+#finalizar-compra:hover {
+    background-color: #218838;
+}
+
+#total-compra {
+    font-size: 1.5rem;
+    color: #dc3545;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
 }

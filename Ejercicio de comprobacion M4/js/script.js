@@ -11,62 +11,55 @@ class Carrito {
     }
 
     agregarProducto(producto, cantidad) {
-        for (let i = 0; i < cantidad; i++) {
-            this.productos.push(producto);
-        }
-        this.actualizarTotal();
+        this.productos.push({ producto, cantidad});
     }
 
     calcularTotal() {
-        return this.productos.reduce((total, producto) => total + producto.precio, 0);
-    }
-
-    mostrarDetalles() {
-        const detalles = {};
-        this.productos.forEach(producto => {
-            if (!detalles[producto.nombre]) {
-                detalles[producto.nombre] = { cantidad: 0, precio: producto.precio };
-            }
-            detalles[producto.nombre].cantidad += 1;
-        });
-
-        return detalles;
-    }
-
-    actualizarTotal() {
-        const total = this.calcularTotal();
-        document.getElementById('total-compra').textContent = total.toFixed(2);
-    }
-
-    finalizarCompra() {
-        const total = this.calcularTotal();
-        alert(`Compra finalizada. El total es $${total}`);
-        this.productos = [];
-        this.mostrarCarrito();
-        this.actualizarTotal();
+        return this.productos.reduce((total, item) => total + item.producto.precio * item.cantidad, 0).toFixed(2);
     }
 
     mostrarCarrito() {
-        const carritoLista = document.getElementById('carrito');
-        carritoLista.innerHTML = '';
+        const carritoElement = document.getElementById('carrito');
+        carritoElement.innerHTML = '';
+        this.productos.forEach((item, index) => {
+            const li = document.createElement('li');
+            li.classList.add('list-group-item');
+            li.innerHTML = `
+                <div>
+                    ${item.producto.nombre} (x${item.cantidad}) - $${(item.producto.precio * item.cantidad).toFixed(2)}
+                </div>
+                <button class="btn btn-danger btn-sm" onclick="eliminarProducto(${index})">Eliminar</button>
+            `;
+            carritoElement.appendChild(li);
+        });
+        document.getElementById('total-compra').textContent = this.calcularTotal();
+    }
 
-        const detalles = this.mostrarDetalles();
-        for (let [nombre, info] of Object.entries(detalles)) {
-            const item = document.createElement('li');
-            item.classList.add('list-group-item');
-            item.textContent = `${nombre} - Cantidad: ${info.cantidad}, Precio: $${info.precio}`;
-            carritoLista.appendChild(item);
+    eliminarProducto(index) {
+        this.productos.splice(index, 1);
+        this.mostrarCarrito();
+    }
+
+    finalizarCompra() {
+        if (this.productos.length > 0) {
+            alert(`Compra finalizada. Total: $${this.calcularTotal()}`);
+            this.productos = [];
+            this.mostrarCarrito();
+        } else {
+            alert('El carrito está vacío.');
         }
     }
 }
 
+const carrito = new Carrito();
+
 const productosDisponibles = [
-    new Producto('Pan', 1500),
+    new Producto('Pan x kg', 1500),
+    new Producto('Quequito', 2500),
     new Producto('Leche', 1800),
     new Producto('Huevos', 650)
 ];
 
-const carrito = new Carrito();
 
 function cargarProductos() {
     const listaProductos = document.getElementById('lista-productos');
@@ -79,18 +72,32 @@ function cargarProductos() {
     });
 }
 
+let productoSeleccionadoIndex = null;
+
 function agregarAlCarrito(index) {
-    const cantidad = parseInt(prompt(`¿Cuantas unidades de ${productosDisponibles[index].nombre} deseas agregar?`));
+    productoSeleccionadoIndex = index;
+    const modal = new bootstrap.Modal(document.getElementById('cantidadModal'));
+    modal.show();
+}
+
+document.getElementById('confirmarCantidad').addEventListener('click', () => {
+    const cantidad = parseInt(document.getElementById('cantidadInput').value);
     if (cantidad > 0) {
-        carrito.agregarProducto(productosDisponibles[index], cantidad);
+        carrito.agregarProducto(productosDisponibles[productoSeleccionadoIndex], cantidad);
         carrito.mostrarCarrito();
+        const modal = bootstrap.Modal.getInstance(document.getElementById('cantidadModal'));
+        modal.hide();
     } else {
-        alert("Por favor, ingresa una cantidad valida.");
+        alert("Por favor, ingresa una cantidad válida.");
     }
+});
+
+function eliminarProducto(index) {
+    carrito.eliminarProducto(index);
 }
 
 document.getElementById('finalizar-compra').addEventListener('click', () => {
     carrito.finalizarCompra();
 });
 
-cargarProductos();
+window.onload = cargarProductos;
