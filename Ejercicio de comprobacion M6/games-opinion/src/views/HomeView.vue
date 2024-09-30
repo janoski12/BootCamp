@@ -14,7 +14,7 @@
               Update: {{ game.updated }}
             </p>
             <router-link :to="{ name: 'Opinions', params: { gameId: game.id } }" class="btn btn-primary">Opinar</router-link>
-            <button class="btn btn-light">
+            <button class="btn btn-light" @click="goToAdminPanel">
               <i class="fa fa-heart"></i>
             </button>
           </div>
@@ -36,6 +36,11 @@ export default {
       .then(data => {
         this.games = data.results;
       });
+  },
+  methods: {
+    goToAdminPanel() {
+      this.$router.push('/admin');
+    }
   }
 };
 </script>

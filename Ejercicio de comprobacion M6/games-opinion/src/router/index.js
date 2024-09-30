@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import OpinionView from '../views/OpinionView.vue';
+import AdminPanel from '@/views/AdminPanel.vue';
 
 const routes = [
   {
@@ -8,9 +9,14 @@ const routes = [
     name: 'home',
     component: HomeView
   },
-  { path: '/opinions/gameId', 
+  { path: '/opinions/:gameId', 
     name: 'Opinions', 
     component: OpinionView 
+  },
+  {
+    path: '/admin',
+    name: 'AdminPanel',
+    component: AdminPanel
   },
   { path: '/:catchAll(.*)', 
     name: 'NotFound', 

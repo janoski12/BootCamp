@@ -1,7 +1,16 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+  <nav class="navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand d-flex align-items-center" href="/">
+        <i class="fas fa-gamepad me-2"></i> Games Opinion
+      </a>
+
+      <div class="d-flex align-items-center">
+        <router-link to="/" class="nab-link text-white d-flex align-items-center">
+          <i class="fas fa-home me-1"></i> Home
+        </router-link>
+      </div>
+    </div>
   </nav>
   <router-view/>
 </template>
@@ -15,8 +24,12 @@
   color: #2c3e50;
 }
 
+.navbar {
+  padding: 10px;
+}
+
 nav {
-  padding: 30px;
+  padding: 10px;
 }
 
 nav a {
@@ -25,6 +38,6 @@ nav a {
 }
 
 nav a.router-link-exact-active {
-  color: #42b983;
+  color: #ffffff;
 }
 </style>

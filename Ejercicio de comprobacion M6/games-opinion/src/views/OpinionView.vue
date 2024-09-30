@@ -1,76 +1,131 @@
 <template>
-    <div>
-      <h1>Opiniones sobre {{ game.name }}</h1>
-      <p v-if="opinions.length === 0">No hay opiniones para este juego.</p>
-      <div v-else>
-        <div v-for="opinion in opinions" :key="opinion.id">
-          <p>{{ opinion.author }}: {{ opinion.text }}</p>
-          <button @click="prepareEditOpinion(opinion)">Editar</button>
-          <button @click="deleteOpinion(opinion.id)">Eliminar</button>
-        </div>
+  <div class="container mt-4">
+
+    <h2 class="text-center">Escribe tu opinión para el juego: {{ game.name }}</h2>
+
+    <div class="card p-4 mb-4">
+      <div class="mb-3">
+        <label for="nombre">Nombre:</label>
+        <input
+          id="nombre"
+          type="text"
+          class="form-control"
+          v-model="author"
+          placeholder="nombre"
+        />
       </div>
-  
-      <!-- Formulario para agregar o editar una opinión -->
-      <input v-model="newOpinion" placeholder="Deja tu opinión" />
-      <button @click="isEditing ? updateOpinion() : addOpinion()">
-        {{ isEditing ? "Actualizar Opinión" : "Agregar Opinión" }}
+
+      <div class="mb-3">
+        <label for="opinion" class="form-label">Opinion</label>
+        <textarea 
+          id="opnion"
+          class="form-control"
+          v-model="newOpinion"
+          placeholder="Tu opinon debe ir aqui"
+          rows="3"
+        ></textarea>
+      </div>
+
+      <button 
+        class="btn btn-primary"
+        @click="isEditing ? updateOpinion() : addOpinion()"
+        >
+          {{ isEditing ? "Actualizar" : "Agregar" }}
       </button>
     </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        game: {},
-        opinions: [],
-        newOpinion: '',
-        isEditing: false,   // Flag para identificar si estamos editando una opinión
-        opinionToEdit: null // Almacena la opinión que se está editando
-      };
-    },
-    mounted() {
-      // Cargar juego específico y opiniones
-      const gameId = this.$route.params.gameId;
-      this.game = { id: gameId, name: "Nombre del Juego" }; 
-      this.opinions = [
-        { id: 1, text: "Gran juego!", author: "Usuario1" },
-        { id: 2, text: "No me gustó tanto.", author: "Usuario2" }
-      ]; // Lista de opiniones simulada
-    },
-    methods: {
-      addOpinion() {
-        if (this.newOpinion) {
-          this.opinions.push({
-            id: Date.now(),
-            text: this.newOpinion,
-            author: "Usuario",
-          });
-          this.newOpinion = '';
-        }
-      },
-  
-      // Prepara la opinión para ser editada
-      prepareEditOpinion(opinion) {
-        this.isEditing = true;
-        this.newOpinion = opinion.text;
-        this.opinionToEdit = opinion; // Guarda la opinión actual para editarla
-      },
-  
-      // Lógica para actualizar una opinión
-      updateOpinion() {
-        if (this.newOpinion && this.opinionToEdit) {
-          this.opinionToEdit.text = this.newOpinion; // Actualiza el texto de la opinión
-          this.isEditing = false;
-          this.newOpinion = ''; // Limpia el campo de texto
-          this.opinionToEdit = null; // Limpia la opinión a editar
-        }
-      },
-  
-      deleteOpinion(id) {
-        this.opinions = this.opinions.filter(op => op.id !== id);
+
+    <h3 class="text-center">A continuación podras ver tus opiniones</h3>
+
+    <div v-for="opinion in opinions" :key="opinion.id" class="card mb-2">
+      <div class="card-header">
+        Opinion creada por: <strong>{{ opinion.author }}</strong>
+      </div>
+      <div class="card-body">
+        <p class="card-text"><strong>Opinion:</strong>{{ opinion.text }}</p>
+        <button
+          class="btn btn-danger me-2"
+          @click="deleteOpinion(opinion.id)"
+          >
+            Eliminar
+        </button>
+        <button
+          class="btn btn-warning"
+          @click="preparEditOpinion(opinion)"
+          >
+            Editar
+        </button>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      game: {},
+      opinions: [],
+      newOpinion: '',
+      author: '',
+      isEditing: false,
+      opinionToEdit: null,
+    };
+  },
+  mounted() {
+    // Obtener el ID del juego desde la URL
+    const gameId = this.$route.params.gameId;
+    
+    // Hacer una solicitud a la API para obtener la información del juego
+    fetch(`https://api.rawg.io/api/games/${gameId}?key=8ec9709e7dc945178492aaa508b29fdf`)
+      .then(response => response.json())
+      .then(data => {
+        this.game = data; // Guardar los datos del juego en el estado
+      })
+      .catch(error => {
+        console.error("Error al obtener el juego:", error);
+      });
+  },
+  methods: {
+    addOpinion() {
+      if (this.newOpinion && this.author) {
+        this.opinions.push({
+          id: Date.now(),
+          text: this.newOpinion,
+          author: this.author,
+        });
+        this.newOpinion = '';
+        this.author = '';
       }
-    }
-  };
-  </script>
+    },
+    preparEditOpinion(opinion) {
+      this.isEditing = true;
+      this.newOpinion = opinion.text;
+      this.author = opinion.author;
+      this.opinionToEdit = opinion;
+    },
+    updateOpinion() {
+      if (this.newOpinion && this.opinionToEdit) {
+        this.opinionToEdit.text = this.newOpinion;
+        this.opinionToEdit.author = this.author;
+        this.isEditing = false;
+        this.newOpinion = '';
+        this.author = '';
+        this.opinionToEdit = null;
+      }
+    },
+    deleteOpinion(id) {
+      this.opinions = this.opinions.filter(op => op.id !== id);
+    },
+  },
+};
+</script>
+
+<style scoped>
+.container {
+  max-width: 800px;
+}
+.card {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+</style>
   
