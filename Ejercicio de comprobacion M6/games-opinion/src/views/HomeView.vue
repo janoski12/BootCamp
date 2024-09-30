@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     goToAdminPanel() {
-      this.$router.push('/admin');
+      this.$router.push('/admin/');
     }
   }
 };

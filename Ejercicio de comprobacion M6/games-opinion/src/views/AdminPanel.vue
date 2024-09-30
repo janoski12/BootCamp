@@ -5,13 +5,22 @@
         </div>
         <div class="main-content">
             <h2>Resumen de Tu cuenta</h2>
-            <p>Le diste me gusta al juego <strong>{{ game.name }}</strong></p>
+            <p v-if="likedGame">Le diste me gusta al juego <strong>{{ likedGame.name }}</strong></p>
 
             <div class="card">
                 <h4>¿Deseas comprar coins para este juego?</h4>
-                <button class="btn btn-warning">Agregar Coins</button>
-                <p>Cantidad de coins comprados</p>
-                <progress value="0" max="100"></progress>
+                <button class="btn btn-warning" @click="addCoins" :disabled="coins >= maxCoins">Agregar Coins</button>
+                <p v-if="coins >= maxCoins" class="text-danger">Llegaste al maximo de tu credito</p>
+                <p>Cantidad de coins comprados: {{ coins }}</p>
+                <div class="progress">
+                    <div
+                        class="progress-bar"
+                        :class="progressBarClass"
+                        role="progressbar"
+                        :style="{ width: progressPercentage + '%' }">
+                        {{ progressPercentage }}
+                    </div>
+                </div>
             </div>
 
             <div class="stats row">
@@ -21,7 +30,7 @@
                 </div>
                 <div class="col stat-card bg-success">
                     <p>Logros en el juego</p>
-                    <h3>166</h3>
+                    <h3>{{ achievements.length }}</h3>
                 </div>
                 <div class="col stat-card bg-info">
                     <p>Recompensas</p>
@@ -38,9 +47,26 @@ export default {
     name: 'AdminPanel',
     data() {
         return {
-            game: {},
-            fullName: ''
+            fullName: '',
+            likedGame: null,
+            achievements: [],
+            coins: 0,
+            maxCoins: 50
         };
+    },
+    computed: {
+        progressPercentage() {
+            return (this.coins / this.maxCoins) * 100;
+        },
+        progressBarClass() {
+            if (this.progressPercentage <= 33) {
+                return "bg-success";
+            } else if (this.progressPercentage <= 66) {
+                return "bg-warning";
+            } else {
+                return "bg-danger";
+            }
+        }
     },
     mounted() {
         const firstName = prompt("Ingrese su nombre:");
@@ -53,18 +79,36 @@ export default {
             this.fullName = `${firstName} ${lastName}`;
         }
 
-        // Obtener el ID del juego desde la URL
-        const gameId = this.$route.params.gameId;
-
-        // Hacer una solicitud a la API para obtener la información del juego
-        fetch(`https://api.rawg.io/api/games/${gameId}?key=8ec9709e7dc945178492aaa508b29fdf`)
+        // Llamada a la API para obtener el juego al que el usuario le dio "me gusta"
+        fetch('https://api.rawg.io/api/games?key=8ec9709e7dc945178492aaa508b29fdf')
             .then(response => response.json())
             .then(data => {
-                this.game = data; // Guardar los datos del juego en el estado
+                // Aquí simulo que el usuario selecciona el primer juego en la lista.
+                // Puedes cambiar la lógica para que el usuario seleccione el juego.
+                this.likedGame = data.results[0];  // Cambia esto por la lógica que necesites
+                this.fetchAchievements(this.likedGame.id);
             })
             .catch(error => {
-                console.error("Error al obtener el juego:", error);
+                console.error("Error al cargar los juegos:", error);
             });
+    },
+    methods: {
+        fetchAchievements(gameId) {
+            // Llamada a la API para obtener los logros del juego
+            fetch(`https://api.rawg.io/api/games/${gameId}/achievements?key=8ec9709e7dc945178492aaa508b29fdf`)
+              .then(response => response.json())
+              .then(data => {
+                  this.achievements = data.results; // Guardamos los logros en el estado
+              })
+              .catch(error => {
+                  console.error("Error al cargar los logros:", error);
+              });
+        },
+        addCoins() {
+            if (this.coins < this.maxCoins) {
+                this.coins += 10;
+            }
+        }
     }
 };
 </script>
@@ -106,5 +150,32 @@ export default {
     margin: 10px;
     border-radius: 10px;
     color: white;
+}
+
+.progress {
+    height: 25px;
+    margin-top: 10px;
+    background-color: #e9ecef;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.progress-bar {
+    height: 100%;
+    color: white;
+    text-align: center;
+    line-height: 25px;
+}
+
+.bg-success {
+    background-color: #28a745 !important;
+}
+
+.bg-warning {
+    background-color: #ffc107 !important;
+}
+
+.bg-danger {
+    background-color: #dc3545 !important;
 }
 </style>

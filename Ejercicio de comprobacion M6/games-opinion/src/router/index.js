@@ -14,7 +14,7 @@ const routes = [
     component: OpinionView 
   },
   {
-    path: '/admin',
+    path: '/admin/',
     name: 'AdminPanel',
     component: AdminPanel
   },
