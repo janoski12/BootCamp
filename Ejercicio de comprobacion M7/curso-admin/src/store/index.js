@@ -1,6 +1,6 @@
+import { createStore } from "vuex";
 
-
-export default new Vuex.Store({
+export default createStore({
   state: {
     cursos: [ 
       { id: 1, img: 'https://i.blogs.es/545cf8/es6-logo/450_1000.png', nombre: 'JavaScript Avanzado', costo: 30000, duracion: '2 meses', cupos: 20, inscritos: 10, completado: false, fecha_registro: '06/03/2022', descripcion: 'Curso con las nuevas actualizaciones de JavaScript.' }, 
@@ -21,7 +21,7 @@ export default new Vuex.Store({
     editarCurso(state, cursoEditado){
       const index = state.cursos.findIndex(curso => curso.id === cursoEditado.id);
       if(index !== -1){
-        Vue.set(state.cursos, index, cursoEditado);
+        state.cursos[index] =  cursoEditado;
       }
     }
   },

@@ -1,9 +1,8 @@
-import Vue from  'vue';
-import VueRouter from  'vue-router';
-import Home from   '../views/Home.vue';
-import Admin from '../views/Admin.vue';
+import { createRouter, createWebHistory } from 'vue-router';
+import Home from   '../views/HomeView.vue';
+import Admin from '../views/AdminView.vue';
+import EditarCurso from '../views/EditarCurso.vue';
 
-Vue.use(VueRouter);
 
 const routes = [
   {
@@ -15,13 +14,17 @@ const routes = [
     path: '/admin',
     name: 'Admin',
     component:  Admin
+  },
+  {
+    path: '/editar/:id',
+    name:  'EditarCurso',
+    component: EditarCurso
   }
 ];
 
-const router = new VueRouter({
-  mode: 'history',
-  base: process.env.BASE_URL,
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
   routes
-});
+})
 
 export default router;

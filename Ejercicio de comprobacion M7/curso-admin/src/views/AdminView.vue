@@ -70,8 +70,8 @@ export default {
         eliminar(id) {
             this.$store.dispatch('eliminarCurso', id);
         },
-        editar(curso) {
-
+        editar(id) {
+            this.$router.push(`/editar/${id}`);
         }
     }
 }
