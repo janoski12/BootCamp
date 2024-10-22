@@ -1,7 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import Home from   '../views/HomeView.vue';
 import Admin from '../views/AdminView.vue';
-import EditarCurso from '../views/EditarCurso.vue';
 
 
 const routes = [
@@ -14,11 +13,6 @@ const routes = [
     path: '/admin',
     name: 'Admin',
     component:  Admin
-  },
-  {
-    path: '/editar/:id',
-    name:  'EditarCurso',
-    component: EditarCurso
   }
 ];
 
