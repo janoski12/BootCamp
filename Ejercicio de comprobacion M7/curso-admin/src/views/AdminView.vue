@@ -82,7 +82,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title">Agregar Curso</h5>
-                        <button type="button" class="btn-close" @click="cerrarModal"></button>
+                        <button type="button" class="btn-close" @click="cerrarModalAgregar"></button>
                     </div>
                     <div class="modal-body">
                         <form @submit.prevent="agregarCurso">
@@ -135,7 +135,7 @@
                                 <button type="submit" class="btn btn-success">Agregar</button>
                                 <button type="reset" class="btn btn-warning" @click="limpiarFormulario">Limpiar
                                     Formulario</button>
-                                <button type="button" class="btn btn-danger" @click="cerrarModal">Cancelar</button>
+                                <button type="button" class="btn btn-danger" @click="cerrarModalAgregar">Cancelar</button>
                             </div>
                         </form>
                     </div>
@@ -251,8 +251,8 @@ export default {
             this.cerrarModal();
         },
 
-        abrirModalEditar(cursos) {
-            this.cursoActual = {cursos};
+        abrirModalEditar(curso) {
+            this.cursoActual = { ...curso };
             this.modalEditarVisible = true;
         },
 
