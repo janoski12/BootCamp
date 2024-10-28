@@ -1,0 +1,19 @@
+[
+    {
+        "id":1,
+        "comuna": "Santiago"
+    },
+    {
+        "id":2,
+        "comuna": "Viña del mar"
+    },
+    {
+        "id":3,
+        "comuna": "Temuco"
+    },
+    {
+        "id":4,
+        "comuna": "Puerto Montt"
+    }
+
+]

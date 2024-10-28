@@ -1,0 +1,31 @@
+[
+    {
+        "id":1,
+        "region":"Metropolitana",
+        "comuna":"Santiago",
+        "direccion":"Calle las flores 456",
+        "en_adopcion":6
+    },
+    {
+        "id":2,
+        "region":"Valparaíso",
+        "comuna":"Viña del mar",
+        "direccion":"Calle las pinos 123",
+        "en_adopcion":6
+    },
+    {
+        "id":3,
+        "region":"Araucanía",
+        "comuna":"Temuco",
+        "direccion":"Calle el bosque 789",
+        "en_adopcion":5
+    },
+    {
+        "id":4,
+        "region":"Los Lagos",
+        "comuna":"Puerto Montt",
+        "direccion":"Avenida central 456",
+        "en_adopcion":6
+    }
+    
+]
